@@ -14,7 +14,7 @@ export default function HeroCarousel() {
     <div className="relative h-[380px] sm:h-[420px] lg:h-[520px]">
       <div className="absolute inset-0 overflow-hidden rounded-3xl ring-1 ring-silver-200">
         {HERO_IMAGES.map((src, idx) => (
-          <div key={idx} className="carousel-slide">
+          <div key={idx} className="carousel-slide" style={{ animationDelay: `${idx * 6}s` }}>
             <Image
               src={src}
               alt="Aurelia Jewelry hero"
@@ -22,7 +22,6 @@ export default function HeroCarousel() {
               priority={idx === 0}
               sizes="(min-width: 1024px) 560px, 100vw"
               className="object-cover"
-              style={{ animationDelay: `${idx * 6}s` }}
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-white/10" />
           </div>
