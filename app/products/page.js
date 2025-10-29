@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+export const dynamic = "force-dynamic";
+
+import { Suspense, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { CATEGORIES, getProducts } from "../data/products";
 
-export default function ProductsPage() {
+function ProductsContent() {
   const params = useSearchParams();
   const category = params.get("category") || "";
   const products = useMemo(() => getProducts(category || undefined), [category]);
@@ -50,6 +52,14 @@ export default function ProductsPage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">Loading…</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
 
