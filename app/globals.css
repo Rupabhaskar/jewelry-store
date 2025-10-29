@@ -80,3 +80,19 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Carousel crossfade/slide animation without JS state */
+@keyframes carouselFade {
+  0% { opacity: 0; transform: scale(1.02) translateX(4px); }
+  5% { opacity: 1; transform: scale(1) translateX(0); }
+  25% { opacity: 1; transform: scale(1) translateX(0); }
+  30% { opacity: 0; transform: scale(1.01) translateX(-4px); }
+  100% { opacity: 0; transform: scale(1.01) translateX(-4px); }
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: carouselFade 24s infinite;
+}

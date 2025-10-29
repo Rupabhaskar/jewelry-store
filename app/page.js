@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import HeroCarousel from "./components/HeroCarousel";
 
 export default function Home() {
   return (
@@ -30,26 +31,25 @@ export default function Home() {
                 <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-mint-200" />Free Shipping</div>
               </div>
             </div>
-            <div className="relative h-[380px] sm:h-[420px] lg:h-[520px]">
-              <div className="absolute inset-0 overflow-hidden rounded-3xl ring-1 ring-silver-200">
-                <Image 
-                  src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop&crop=center" 
-                  alt="Elegant jewelry collection - Aurelia Jewelry" 
-                  fill 
-                  priority 
-                  sizes="(min-width: 1024px) 560px, 100vw" 
-                  className="object-cover" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-white/10" />
-              </div>
-              <div className="absolute -bottom-6 -right-6 h-40 w-40 rounded-2xl gold-gradient blur-xl opacity-70" aria-hidden />
-            </div>
+            <HeroCarousel />
           </div>
         </div>
       </section>
 
       {/* Categories */}
       <section id="categories" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/** Category images */}
+        {(() => {
+          const categoryImages = {
+            necklaces: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=400&fit=crop&crop=center",
+            rings: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=400&fit=crop&crop=center",
+            bangles: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=400&fit=crop&crop=center",
+            earrings: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=400&fit=crop&crop=center",
+            pendants: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=400&fit=crop&crop=center",
+            sets: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=400&fit=crop&crop=center",
+          };
+          return null;
+        })()}
         <h2 className="text-2xl sm:text-3xl font-semibold">Shop by Category</h2>
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {[
@@ -61,7 +61,26 @@ export default function Home() {
             { name: "Sets", q: "sets" },
           ].map((cat) => (
             <Link key={cat.q} href={{ pathname: "/products", query: { category: cat.q } }} className="group rounded-xl border border-silver-200 bg-white/70 p-4 hover:border-gold-400 hover:shadow-md transition-all">
-              <div className="h-24 rounded-lg silver-gradient group-hover:gold-gradient transition-colors" />
+              <div className="relative h-24 overflow-hidden rounded-lg bg-silver-50">
+                <Image
+                  src={(() => {
+                    const m = {
+                      necklaces: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=400&fit=crop&crop=center",
+                      rings: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=400&fit=crop&crop=center",
+                      bangles: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=400&fit=crop&crop=center",
+                      earrings: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=400&fit=crop&crop=center",
+                      pendants: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=400&fit=crop&crop=center",
+                      sets: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=400&fit=crop&crop=center",
+                    };
+                    return m[cat.q] || "/window.svg";
+                  })()}
+                  alt={`${cat.name}`}
+                  fill
+                  sizes="(min-width: 1024px) 180px, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 ring-1 ring-inset ring-silver-200/60" />
+              </div>
               <div className="mt-3 text-sm font-medium group-hover:text-gold-600">{cat.name}</div>
             </Link>
           ))}
