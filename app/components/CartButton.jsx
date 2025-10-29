@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { useCart } from "@/app/providers";
-import { useEffect, useState } from "react";
 
 export default function CartButton() {
   const { items } = useCart();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
   const count = items.reduce((acc, i) => acc + i.qty, 0);
 
   return (
@@ -19,9 +16,9 @@ export default function CartButton() {
         <circle cx="18" cy="20" r="1.5" fill="currentColor" />
       </svg>
       Cart
-      {mounted && count > 0 ? (
+      {count > 0 && (
         <span className="absolute -top-2 -right-2 h-5 min-w-5 px-1 rounded-full bg-gold-400 text-white text-[11px] leading-5 text-center">{count}</span>
-      ) : null}
+      )}
     </Link>
   );
 }

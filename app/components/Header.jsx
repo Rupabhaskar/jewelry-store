@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "./CartButton";
+import dynamic from "next/dynamic";
+const CartButton = dynamic(() => import("./CartButton"), { ssr: false });
 
 function NavLinks() {
   return (
